@@ -25,6 +25,7 @@ questions = [
 
 bCreate_Prompt = False
 bGPT_PW_Correct = False
+prompt = ""
 
 # 응답 저장 리스트
 responses = []
@@ -76,10 +77,9 @@ for i, q in enumerate(questions):
 # 사용자의 응답을 기반으로 최종 프롬프트 생성
 if st.button("결과 생성"):
     bCreate_Prompt = True
+    prompt = f"{responses[2]}에서 {responses[1]} 동안 작성된 {responses[3]} {responses[0]}를(을) {responses[4]} 형식으로 찾고 있습니다. 이 문서는 {responses[5]}를 위해 사용될 것입니다."
 
 if bCreate_Prompt:
-    prompt = f"{responses[2]}에서 {responses[1]} 동안 작성된 {responses[3]} {responses[0]}를(을) {responses[4]} 형식으로 찾고 있습니다. 이 문서는 {responses[5]}를 위해 사용될 것입니다."
-    
     # 생성된 프롬프트를 코드블록으로 표시
     st.write("### 생성된 프롬프트:")
     st.code(prompt, language='text', wrap_lines = True)
@@ -91,19 +91,3 @@ if bCreate_Prompt:
             st.write('ㅎㅎㅎㅎㅎ')
         else:
             st.error('Wrong Password', icon="🚨")
-
-    # 복사 버튼과 JavaScript를 이용한 복사 기능 구현
-    # st.markdown(f"""
-    # <button onclick="copyToClipboard()">복사</button>
-    # <script>
-    # function copyToClipboard() {{
-    #     const text = `{prompt}`;
-    #     navigator.clipboard.writeText(text).then(function() {{
-    #         alert('프롬프트가 클립보드에 복사되었습니다!');
-    #     }}, function(err) {{
-    #         alert('복사 실패: ' + err);
-    #     }});
-    # }}
-    # </script>
-    # """, unsafe_allow_html=True)
-
