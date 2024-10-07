@@ -1,6 +1,23 @@
 import streamlit as st
 from datetime import date
 
+from openai import OpenAI
+
+# OpenAI 클라이언트 초기화
+openai_api_key = st.secrets["openai"]["api_key"]
+client = OpenAI(api_key  = openai_api_key)
+
+# Generate a response using the OpenAI API.
+stream = client.chat.completions.create(
+    model="gpt-4o-mini-2024-07-18",
+    messages=[
+        {"role": m["role"], "content": m["content"]}
+        for m in st.session_state.messages
+    ],
+    stream=True,
+)
+
+
 # 질문 리스트
 questions = [
     {"question": "어떤 유형의 문서를 찾고 계십니까?", 
@@ -71,6 +88,13 @@ if st.button("결과 생성"):
     st.write("### 생성된 프롬프트:")
     st.code(prompt, language='text', wrap_lines = True)
 
+    pw_input = st.text_input("비밀번호를 입력하세요.")
+    if st.button("LLM"):
+        if pw_input is not 'PhD.i':
+            st.error('Wrong Password', icon="🚨")
+        else:
+            st.write('ㅎㅎㅎㅎㅎ')
+
     # 복사 버튼과 JavaScript를 이용한 복사 기능 구현
     # st.markdown(f"""
     # <button onclick="copyToClipboard()">복사</button>
@@ -85,3 +109,4 @@ if st.button("결과 생성"):
     # }}
     # </script>
     # """, unsafe_allow_html=True)
+
