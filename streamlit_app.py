@@ -79,6 +79,7 @@ if st.button("결과 생성"):
 
     pw_input = st.text_input("비밀번호를 입력하세요.")
     if st.button("LLM"):
+        st.write('test')
         if pw_input is not 'PhD.i':
             st.error('Wrong Password', icon="🚨")
         else:
