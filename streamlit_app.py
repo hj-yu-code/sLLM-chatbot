@@ -69,8 +69,14 @@ for i, q in enumerate(questions):
     responses.append(response)
     st.write("---")
 
+bCreate_Prompt = False
+bGPT_PW_Correct = False
+
 # 사용자의 응답을 기반으로 최종 프롬프트 생성
 if st.button("결과 생성"):
+    bCreate_Prompt = True
+
+if bCreate_Prompt:
     prompt = f"{responses[2]}에서 {responses[1]} 동안 작성된 {responses[3]} {responses[0]}를(을) {responses[4]} 형식으로 찾고 있습니다. 이 문서는 {responses[5]}를 위해 사용될 것입니다."
     
     # 생성된 프롬프트를 코드블록으로 표시
@@ -79,11 +85,11 @@ if st.button("결과 생성"):
 
     pw_input = st.text_input("비밀번호를 입력하세요.")
     if st.button("LLM"):
-        st.write('test')
-        if pw_input is not 'PhD.i':
-            st.error('Wrong Password', icon="🚨")
-        else:
+        if pw_input is 'PhD.i':
+            bGPT_PW_Correct = True
             st.write('ㅎㅎㅎㅎㅎ')
+        else:
+            st.error('Wrong Password', icon="🚨")
 
     # 복사 버튼과 JavaScript를 이용한 복사 기능 구현
     # st.markdown(f"""
