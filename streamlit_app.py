@@ -7,17 +7,6 @@ from openai import OpenAI
 openai_api_key = st.secrets["openai"]["api_key"]
 client = OpenAI(api_key  = openai_api_key)
 
-# Generate a response using the OpenAI API.
-stream = client.chat.completions.create(
-    model="gpt-4o-mini-2024-07-18",
-    messages=[
-        {"role": m["role"], "content": m["content"]}
-        for m in st.session_state.messages
-    ],
-    stream=True,
-)
-
-
 # 질문 리스트
 questions = [
     {"question": "어떤 유형의 문서를 찾고 계십니까?", 
