@@ -23,6 +23,9 @@ questions = [
      "options": ["참고용", "보고서 작성", "발표 준비", "분석 작업", "협업"]}
 ]
 
+bCreate_Prompt = False
+bGPT_PW_Correct = False
+
 # 응답 저장 리스트
 responses = []
 
@@ -69,8 +72,6 @@ for i, q in enumerate(questions):
     responses.append(response)
     st.write("---")
 
-bCreate_Prompt = False
-bGPT_PW_Correct = False
 
 # 사용자의 응답을 기반으로 최종 프롬프트 생성
 if st.button("결과 생성"):
